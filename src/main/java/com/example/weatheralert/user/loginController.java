@@ -1,6 +1,7 @@
 package com.example.weatheralert.user;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +23,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/login")
+@RequiredArgsConstructor
 public class loginController {
-//
+
+    private final loginService service;
+
 //    @GetMapping("/")
 //    public ModelAndView loginFrm(){
 //        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("login");
+//        mv.setViewName("login.html");
 //
 //        return mv;
 //    }
+
 
     @GetMapping("/msg")
     public String frm(){
@@ -39,9 +44,20 @@ public class loginController {
     }
 
     @PostMapping("/login")
-    public String login(){
+    public String login(User user){
 
-        return "";
+        String msg = "login fail";
+        if(service.getUser(user.getId()).getPassword()!=null){
+            msg = "login success";
+        }
+
+        return msg;
     }
 
 }
+
+// JSON 데이터 한글화
+//    JSON Object 저장 할 때
+//    HTTP response 의 Character set 을 UTF-8 로 설정하면
+//    한글 깨지는 현상 막을 수 있습니다.
+// server.servlet.encoding.charset=UTF-8 server.servlet.encoding.force=true 추가함

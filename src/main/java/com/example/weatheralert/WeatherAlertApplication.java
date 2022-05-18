@@ -14,6 +14,10 @@ public class WeatherAlertApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WeatherAlertApplication.class, args);
+        System.out.println();
+
     }
+
+
 
 }
