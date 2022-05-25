@@ -31,7 +31,7 @@ public class loginController {
 //    @GetMapping("/")
 //    public ModelAndView loginFrm(){
 //        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("login.html");
+//        mv.setViewName("login");
 //
 //        return mv;
 //    }
@@ -40,10 +40,12 @@ public class loginController {
     @GetMapping("/msg")
     public String frm(){
 
-        return "heloo";
+        return "heloo한국";
     }
 
-    @PostMapping("/login")
+
+    // 그저 로그인이 잘되는지 확인용.
+    @PostMapping("/login/loginmsg")
     public String login(User user){
 
         String msg = "login fail";

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 @Repository
 public interface loginDao extends JpaRepository {
 
@@ -36,3 +37,4 @@ public interface loginDao extends JpaRepository {
 //    };
 
 }
+*/

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>지역 설정</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+
+        #app{
+            position: absolute;
+            top: 15%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
+            background-color: ivory;
+        }
+
+        h2,h3,h4{
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        select{
+            text-align: center;
+        }
+
+        #regionBox{
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div><!-- 타임리프 -->
+        <a class="btn btn-secondary my-2 mr-2 my-sm-0" th:href="@{/login}"
+           sec:authorize="!isAuthenticated()">로그인</a>
+        <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/register}"
+           sec:authorize="!isAuthenticated()">회원가입</a>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
+            <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+            <span class="text-white" sec:authentication="name">사용자</span>
+            <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+
+
+    </div>
+
+    <div id="app">
+        <h2>안녕하세요! <span th:text="${name}">김철수</span>님</h2>
+        <h3>오늘은 <span th:text="${#dates.createNow()}">2022년 5월 23일</span>입니다.</h3>
+        <h3>현재 회원님께서 설정해주신 지역은 <span th:text="${code}">서울입니다.</span></h3>
+        <h4>지역을 선택해주세요(일단은 수도권 기준으로만)</h4>
+        <div id="regionBox">
+            <select>
+                <option selected>전체</option>
+                <option>서울</option>
+                <option>인천</option>
+                <option>성남</option>
+                <option>일산</option>
+                <option>의정부</option>
+
+            </select>
+            <button type="button">선택</button>
+        </div>
+    </div>
+
+</body>
+</html>
