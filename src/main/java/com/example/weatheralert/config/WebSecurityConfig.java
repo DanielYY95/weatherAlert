@@ -27,17 +27,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/register", "/swagger-ui.html").permitAll() // swagger 흰 화면만..
+                    .antMatchers("/", "/register", "/swagger-ui.html", "/swagger/**",
+                            "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/api/v2/**").permitAll() // swagger 흰 화면만..
                             // 로그인없이도 누구나 접근 가능 // css 같은 것들도 설정필요
                     .anyRequest().authenticated() // 여기를 제외한 그밖의 요청들은 인증받아야한다.
                     .and() // 이어서
                 .formLogin()
                     .loginPage("/login") // 로그인 페이지 설정
+                    .loginProcessingUrl("/login")
                     .permitAll() // 로그인 누구나 할 수 있게
                     .and()
                 .logout()
                     .permitAll();
-    }
+    } // login postmapping이 없어도 되는 이유: configure에서 설정해줘서 그렇다.
 
     // 로그인을 위해서는 SecurityConfig 클래스에 AuthenticationManagerBuilder를 주입해서 인증에 대한 처리를 해야 합니다.
     // AuthenticationManagerBuilder는 인증에 대한 다양한 설정을 생성할 수 있습니다.
@@ -52,11 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select id,password,enabled " // 사용자 정보를 가져오는 쿼리
                         + "from userinfo " // 이렇게 공백을 만들어줘야 붙지 않는다.
                         + "where id = ?")
-                .authoritiesByUsernameQuery("select id, code " // 권한 정보를 가져오는 쿼리
+                .authoritiesByUsernameQuery("select u.id, r.name " // 권한 정보를 가져오는 쿼리
                         + "from userrole ur inner join userinfo u on ur.user_id = u.id "
-                        + "inner join role r on ur.role_id = r.id"
+                        + "inner join role r on ur.role_id = r.id "
                         + "where u.id = ?");
     }
+
 
     // Authentication 로그인 처리(인증)
     // Authroization 권한 처리(인가)

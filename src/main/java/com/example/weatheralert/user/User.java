@@ -24,7 +24,8 @@ public class User {
 
     private String alert;
 
-    private String enabled;
+
+    private Boolean enabled;
 
 
     public User(String id, String password, String email, String alert, Integer code) {

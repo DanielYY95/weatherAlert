@@ -28,14 +28,6 @@ public class normalController {
 
         return "register";
     }
-    @PostMapping("/register")
-    public String reg(User user){
-        service.save(user); //회원가입
- 
-
-        return "redirect:/app";
-    }
-
 
     @GetMapping("/login")
     public String loginfrm(){
@@ -43,6 +35,13 @@ public class normalController {
 
         return "login";
     }
+
+    @PostMapping("/login")
+    public String loginProcess(User user){
+
+        return "redirect:/app";
+    }
+
 
     @GetMapping("/app")
     public String settingFrm(@RequestParam(name="name", required = false) String name,

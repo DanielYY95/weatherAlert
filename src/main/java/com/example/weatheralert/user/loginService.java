@@ -48,7 +48,7 @@ public class loginService{
 
         String encodedPassword = passwordEncoder.encode(user.getPassword()); // 비밀번호 암호화한 상태로 가입
         user.setPassword(encodedPassword);
-        user.setEnabled("true"); // 성공적으로 비밀번호 암호화가 됬으면 진행
+        user.setEnabled(true); // 성공적으로 비밀번호 암호화가 됬으면 진행
         user.setAlert("on"); // 처음에는 on으로 시작
         user.setCode(0);
         

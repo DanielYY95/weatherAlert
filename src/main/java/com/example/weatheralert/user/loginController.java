@@ -45,7 +45,7 @@ public class loginController {
 
 
     // 그저 로그인이 잘되는지 확인용.
-    @PostMapping("/login/loginmsg")
+    @PostMapping("/loginmsg")
     public String login(User user){
 
         String msg = "login fail";
